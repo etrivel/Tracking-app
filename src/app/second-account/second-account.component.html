@@ -1,0 +1,142 @@
+<style>
+    .header {
+      position: sticky;
+      top: 0;
+    }
+  
+  </style>
+  
+  <body style="background-color: transparent;">
+
+    <div class="container">
+    
+        <form [formGroup]="userForm">
+          <div class="mt-5">
+            <div class="form-row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Sending Money</label>
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <input type="number"
+                    formControlName="SendedAmount" [(ngModel)]="anotherObj.SendedAmount" onclick="this.select();"
+                    ng-model="searchText"  class="form-control" placeholder="Enter amount">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Recieved Money</label>
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <input select-all-on-click type="number" formControlName="RecievedAmount"   [(ngModel)]="anotherObj.RecievedAmount"
+                    onclick="this.select();"  class="form-control" placeholder="0" >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+               
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Reason</label>
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <input type="text" formControlName="ReasonToSend" class="form-control" onclick="this.select();"
+                    [(ngModel)]="anotherObj.ReasonToSend" placeholder="Enter Reason">
+                  </div>
+                </div>
+                <br>
+                <div class="col">
+                 
+                  <input type="text" formControlName="date" class="form-control" onclick="this.select();"
+                    [(ngModel)]="anotherObj.date" placeholder=>
+                </div>
+              </div>
+              <div class="form-row mt-4">
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-primary" routerLink="/table" (click)="addItem()">Add</button>&nbsp;
+                  <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <br>
+        <div  class="container">SearchReason : 
+          <input  type="text" placeholder="Enter Reason"  (keyup)="applyFilter($event.target)"  >
+          </div>
+      <div class="col-md-8 c0l-sm-8 mt-4 mb-4 ">
+        <button  class="button"  (click)="exportexcel()">Export <img src="../assets/images/images1.png" 
+          alt="100" width="20" height="20"> </button>
+        
+        <br>
+        <div  class="table-responsive" style="height: 250px;overflow: scroll;">
+          <table border="1" id="excel-table" style="width: 100%;" class="table table-bordered table-striped">
+            <thead class="text-light bg-dark" style="position: sticky; top: 0;background-color:blueviolet;">
+              <tr>
+                <th class="col-sm-1">S.No</th>
+                <th class="col-sm-2">Date</th>
+                <th class="col-sm-2">Sending Amount</th>
+                <th class="col-sm-2">Recieved Amount</th>
+                <th class="col-sm-5">Reason for spending/recieving money</th>
+                <th class="col-sm-2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of userList1;let i = index">
+                <td><span>{{i+1}}</span></td>
+                <td><span>{{item.date}}</span></td>
+                <td><span>{{item.SendedAmount}}</span></td>
+                <td><span>{{item.RecievedAmount}}</span></td>
+                <td><span>{{item.ReasonToSend}}</span></td>
+                <td>
+                  <!-- <button type="button" class="btn btn-primary">Edit</button> -->
+                  <button type="button" class="btn btn-primary" routerLink="/DisplayTable"  (click)="remove(item.userId)" >Remove</button>
+                </td>
+  
+              </tr>
+            </tbody>
+            <tfoot class="text-light bg-dark" style="position: sticky; bottom: 0;background-color:blueviolet;">
+              <tr>
+                <td class="table_left"><span >Total</span></td>
+                <td><span>{{user1List[0].date}}</span></td>
+                <td><span>{{sendAmount}}</span></td>
+                <td><span>{{RecieveAmount}}</span></td>
+                <td><span>{{user1List[0].ReasonToSend}}</span></td>
+                <td><span>{{user1List[0].SendedAmount}}</span></td>
+              </tr>
+              </tfoot>
+          </table>
+        </div>
+        <div class="col-md-12 c0l-sm-8 mt-4 mb-4 ">
+        <div class="table-responsive" style="height: 120px">
+        <table class="table table-responsive table-bordered table-striped mt-2">
+          <thead class="text-light bg-dark" style="position: sticky; top: 0;background-color:blueviolet;">
+            <tr>
+            <th class="col-sm-1">TotalAmount</th>
+            <th class="col-sm-2">Total</th>
+            <th class="col-sm-3">Having Amount</th>
+            <th class="col-sm-4">Total Spending</th>
+            <th class="col-sm-5">Total Recieving</th>
+            <th class="col-sm-6">GrandTotal</th>
+            </tr>
+          </thead>
+          <tbody style="height : 150px;" style="position: sticky">
+            <td>{{userSum}}</td>
+            <td>{{totalAmt}}</td>
+            <td>{{i}}</td>
+            <td>{{sendAmount}}</td>
+            <td>{{RecieveAmount}}</td>
+            <td>{{grand}}</td>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+    </div>
+  </body>
+  

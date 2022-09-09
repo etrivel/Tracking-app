@@ -1,0 +1,39 @@
+<body style="background-color: transparent;">
+    
+    <div class="container" >
+    
+        <form >
+          <div class="mt-5">
+            <div class="form-row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>UserName</label>
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <input touched type="text"  #txt1  onclick="this.select();" placeholder="Enter your UserName" (keyup)="select()">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Password</label>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                      <input type="password" #txt2 onclick="this.select();" placeholder="Enter your Password" (keyup)="select()">
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <button type="button" class="btn btn-primary"  (click)="recieveMoney(txt1,txt2)"
+          >Submit</button>
+        </form>
+        <br>
+         <div  Style="text-align: center;color: red;" >
+              <a *ngIf="touched"> {{Credentials}}</a>
+         </div>
+    </div>    
+</body>

@@ -1,0 +1,12 @@
+input {
+    border: 0;
+    border-bottom: 2px solid #bdbdbd;
+    padding: 5px 0;
+    background-color: transparent;
+  }
+  input:focus {
+    outline: none;
+  }
+  input:focus + .sb-textfield__row {
+    width: 100%;
+  }

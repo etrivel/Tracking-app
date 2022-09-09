@@ -1,0 +1,22 @@
+.input-group{
+    height: 25px!important;
+}
+.btn{
+    width: 68px !important;
+}
+.btn-info{
+    width: 136px !important;
+}
+
+.form-control  {
+    border: 0;
+    border-bottom: 2px solid #bdbdbd;
+    padding: 5px 0;
+    background-color: transparent;
+  }
+  .form-control:focus {
+    outline: none;
+  }
+  .form-control:focus + .sb-textfield__row {
+    width: 100%;
+  }

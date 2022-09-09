@@ -1,0 +1,84 @@
+
+<div style="background-image: url('../assets/images/test1.jpg'); height: 400%;">
+  <br>
+<div  class="container">SearchReason : 
+<input  type="text" placeholder="Enter Reason"  (keyup)="applyFilter($event.target)"  >
+</div>
+<div class="container">
+<div class="col-md-8 mt-4 mb-4">
+  <!-- overflow: scroll; -->
+  <!-- class="table-responsive" -->
+  <!-- <div class="col-md-8 c0l-sm-8 mt-4 mb-4 "> -->
+    <div class="table-responsive" style="height: 250px;overflow: scroll;">
+      <table  class="table table-bordered table-striped">
+        <thead class="text-light bg-dark" style="position: sticky; top: 0;background-color:blueviolet;">
+          <tr>
+            <th class="col-sm-1">S.No</th>
+            <th class="col-sm-2">Date</th>
+            <th class="col-sm-2">Sending Amount</th>
+            <th class="col-sm-2">Recieved Amount</th>
+            <th class="col-sm-5">Reason for spending/recieving money</th>
+            <th class="col-sm-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of userList;let i = index ">
+            <td><span>{{i+1}}</span></td>
+            <td><span>{{item.date}}</span></td>
+            <td><span>{{item.SendedAmount}}</span></td>
+            <td><span>{{item.RecievedAmount}}</span></td>
+            <td><span>{{item.ReasonToSend}}</span></td>
+            <td>
+              <!-- <button type="button" class="btn btn-primary">Edit</button> -->
+              <button type="button" class="btn btn-primary" routerLink="/table"  (click)="remove(item.userId)" >Remove</button>
+            </td>
+
+          </tr>
+        </tbody> 
+        <!-- <div class="d-flex justify-content-between p-2">
+          <!-- <ngb-pagination [collectionSize]="exportStudentData.length" [(page)]="page" [pageSize]="pageSize"
+              [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> -->
+              <!-- <ngb-pagination  [(page)]="page" [pageSize]="pageSize"
+              ></ngb-pagination>
+
+          <select class="form-select" style="width: auto" [(ngModel)]="pageSize">
+              <option *ngFor="let pageNo of pageSizeArray" [ngValue]="pageNo">&nbsp;&nbsp;&nbsp;&nbsp;{{ pageNo
+                  }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          </select>
+      </div> --> 
+      </table>
+    </div>
+  <!-- </div> -->
+  <br>
+ 
+  <div class="col-md-12 c0l-sm-8 mt-4 mb-4 ">
+    <div class="table-responsive" style="height: 120px">
+    <table class="table table-responsive table-bordered table-striped mt-2">
+      <thead class="text-light bg-dark" style="position: sticky; top: 0;background-color:blueviolet;">
+        <tr>
+        <th class="col-sm-1">TotalAmount</th>
+        <th class="col-sm-2">Total</th>
+        <th class="col-sm-3">Having Amount</th>
+        <th class="col-sm-4">Total Spending</th>
+        <th class="col-sm-5">Total Recieving</th>
+        <th class="col-sm-6">GrandTotal</th>
+        </tr>
+      </thead>
+      <tbody style="height : 150px;" style="position: sticky;overflow-y: scroll;">
+        <td>{{userSum}}</td>
+        <td>{{totalAmt}}</td>
+        <td>{{i}}</td>
+        <td>{{sendAmount}}</td>
+        <td>{{RecieveAmount}}</td>
+        <td>{{grand}}</td>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+</div>
+<br>
+<footer>
+  <br>
+</footer>
+</div>

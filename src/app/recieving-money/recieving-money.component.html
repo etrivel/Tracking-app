@@ -1,0 +1,51 @@
+<br>
+<!-- <div [routerLink]="isLogin ? ['/recieveMoney'] : ['/LoginComponent']" *ngIf="isLogin" class="container"> -->
+<div class="container">
+  <div  class="col-md-12" >
+    <div class="form-group">
+      <label>Canara</label>
+    </div>
+    <div class="form-row">
+    <div class="col">
+      <input   type="text" #txt >
+    </div>
+  </div>
+  </div>
+  <br>
+  <div>  <button type="button" class="btn btn-primary"  routerLink="/table" (click)="addItem(txt)">Add</button>&nbsp;
+    <button type="button" class="btn btn-primary" routerLink="/table" (click)="remove()">Remove</button>&nbsp;</div>
+
+  <br>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label>Kotak</label>
+    </div>
+    <div class="form-row">
+    <div class="col">
+      <input   type="text" #txt1 >
+    </div>
+  </div>
+  </div>
+  <br>
+  <div>  <button type="button" class="btn btn-primary"  routerLink="/table" (click)="recieveMoney(txt1)">Add</button>&nbsp;
+    <button type="button" class="btn btn-primary" routerLink="/table" (click)="remove1()">Remove</button>&nbsp;</div>
+<br>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Hands On Money</label>
+      </div>
+      <div class="form-row">
+      <div class="col">
+        <input   type="text" #txt2 >
+      </div>
+    </div>
+    </div>
+    <br>
+    <div>  <button type="button" class="btn btn-primary"  routerLink="/table" (click)="purse(txt2)">Add</button>&nbsp;
+      <button type="button" class="btn btn-primary" routerLink="/table" (click)="remove2()">Remove</button>&nbsp;</div>
+</div>
+ <div>
+      <!-- <ng-template   #elseBlock >
+        <app-login></app-login>
+       </ng-template> -->
+  </div>

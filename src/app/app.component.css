@@ -1,0 +1,51 @@
+
+element {
+    background-color: transparent;	
+  }
+
+  .navbar-brand {
+    text-align: center;
+}
+
+.navbar-brand {
+  float:none;
+  overflow: visible;
+}
+
+
+a{
+  text-decoration: none;
+  color: white;
+}
+img{
+  background-color: transparent;	
+}
+a:hover, a:active{
+  color: lightgray;
+}
+.nav-caption{
+  display: inline-block;
+  padding-left: 6px;
+}
+.nav{
+  background-color: white;
+  position: fixed;
+}
+.toggle {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  background-image: var(--bs-navbar-toggler-icon-bg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+
+
+
+
+
+
+   
