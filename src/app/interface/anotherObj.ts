@@ -1,8 +1,8 @@
 export class anotherObj{
-    userId?:number;
-    SendedAmount?:number | 0;
-    RecievedAmount?:number | 0;
-    date?:Date;
-    ReasonToSend?:String;
+    userId1?:number;
+    SendedAmount1?:number | 0;
+    RecievedAmount1?:number | 0;
+    date1?:Date;
+    ReasonToSend1?:String;
 }
 

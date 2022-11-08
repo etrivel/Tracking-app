@@ -9,7 +9,7 @@
   <!-- overflow: scroll; -->
   <!-- class="table-responsive" -->
   <!-- <div class="col-md-8 c0l-sm-8 mt-4 mb-4 "> -->
-    <div class="table-responsive" style="height: 250px;overflow: scroll;">
+    <div class="table-responsive" style="height: 300px;overflow: scroll;">
       <table  class="table table-bordered table-striped">
         <thead class="text-light bg-dark" style="position: sticky; top: 0;background-color:blueviolet;">
           <tr>
@@ -35,6 +35,16 @@
 
           </tr>
         </tbody> 
+        <tfoot class="text-light bg-dark" style="position: sticky; bottom: 0;background-color:blueviolet;">
+          <tr>
+            <td class="table_left"><span >Total</span></td>
+            <td><span>{{user1List[0].date}}</span></td>
+            <td><span>{{sendAmount}}</span></td>
+            <td><span>{{RecieveAmount}}</span></td>
+            <td><span>{{user1List[0].ReasonToSend}}</span></td>
+            <td><span>{{user1List[0].SendedAmount}}</span></td>
+          </tr>
+          </tfoot>
         <!-- <div class="d-flex justify-content-between p-2">
           <!-- <ngb-pagination [collectionSize]="exportStudentData.length" [(page)]="page" [pageSize]="pageSize"
               [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> -->

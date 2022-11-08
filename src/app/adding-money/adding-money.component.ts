@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LocalStorageService } from '../service/local-storage.service';
 import {userObj} from '../interface/Object'
 import { userSignup } from '../interface/signup';
@@ -11,6 +11,8 @@ import { isInteger, isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import * as XLSX from 'xlsx';
 import * as moment from 'moment';
 import { data } from 'jquery';
+// import jsPDF from 'jspdf';
+import { jsPDF } from "jspdf"
 
 @Component({
   selector: 'app-adding-money',
@@ -18,12 +20,13 @@ import { data } from 'jquery';
   //template:'<h1>{{totalAmt}}</h1>',
   styleUrls: ['./adding-money.component.css']
 })
+ 
 export class AddingMoneyComponent implements OnInit {
   initialValue:number=0;
   currentDate = new Date();
   testing : number=0;
   [x: string]: any;
-  userList:userObj [];
+   userList:userObj [];
   user1List :userObj [] = [];
   userForm:FormGroup;
   userSum:any;
@@ -46,7 +49,7 @@ this.list=[];
    this.userObj.RecievedAmount = 0;
    this.userObj.SendedAmount =0 ;
    this.userObj.date = this.date1;
-    this.userForm=this.fb.group({
+    this.userForm=this.fb.group({ 
       SendedAmount:[0,Validators.required],
       RecievedAmount:["0",Validators.required],
       ReasonToSend:['',Validators.required],
@@ -55,12 +58,6 @@ this.list=[];
   
       this.ap.bank = "Canara";
       this.ap.hi = false;
-    //   if(localStorage.getItem('isLogin') == "true"){
-    //   setTimeout(() =>{
-    //       localStorage.setItem('isLogin',String(false))
-    //      window.location.reload();
-    //   },30000);
-    // }
      }
   
    inputF = document.getElementById("one");
@@ -72,30 +69,15 @@ this.list=[];
 
   ngOnInit(): void { 
     console.log("ytext ")
-// if(localStorage.getItem('isLogin') == "true"){
-//     this.isLogin =  true;
-// }
-//     else{
-//       this.isLogin =  false;
-//     }
-    // console.log("isLogoin : ",this.isLogin)
     this.getAddingMoneyValue()
   console.log("this.date1  : ",this.date1)
   console.log("month : ",this.currentDate.toLocaleDateString('en-GB', { timeZone: 'GMT' }).toLocaleLowerCase())
-  //  this.list = this.storage.getItem("token");
-  //  this.list.getItem("token");
-   // this.list.push("token");
    const records =localStorage.getItem('userList');
    if(records!==null){
      this.userList = JSON.parse(records);
      this.user1List = JSON.parse(records);
      this.userList= this.user1List.reverse();
      }
-  //  let total =0;
-  //   this.userList.forEach((item =>{
-  //      total = total + item.SendedAmount?;
-  //   });
-  //   console.log(total);
   this.userSum=localStorage.getItem("Amount");
    this.totalAmt = this.userList.reduce((total,item)=>{
     this.grand=  +(this.grand as number) + +(item.SendedAmount as number) + +(item.RecievedAmount as number);
@@ -108,6 +90,7 @@ this.list=[];
  this.i=this.userSum-this.totalAmt;
  console.log(this.totalAmt);
  console.log("i value"+this.i);
+ console.log(this.userList,"this.userList")
    
 }
 public signup(){
@@ -115,8 +98,6 @@ public signup(){
 }
 
   public addItem(){
-    // this.storage.setItem("token",this.userForm.value);
-    // this.list.push("token");
     const latestId=this.getNewId();
     this.userObj.userId= latestId;
     const oldRecords = localStorage.getItem('userList');
@@ -184,18 +165,9 @@ remove(id: any){
   if (oldRecords !== null){
   const userList=JSON.parse(oldRecords);
   userList.splice(userList.findIndex((a:any)=>a.userId == id),1);
-// userList.push(this.userObj);
   localStorage.setItem('userList',JSON.stringify(userList));
 }
-  // this.list.forEach((value: any,index: any)=>{
-  //   if(value == element)
-  //   this.list.splice(index,1);
-  
-  //});
-
-
-     
-  const records =localStorage.getItem('userList');
+ const records =localStorage.getItem('userList');
   if(records!==null){
     this.userList = JSON.parse(records);
      this.totalAmt = this.userList.reduce((total,item)=>{
@@ -255,9 +227,91 @@ exportexcel(): void
   }catch(e){
 console.log("message : ",e)
   }
+}
+// content : ElementRef | undefined;
+@ViewChild('content') content: ElementRef;  
+public async SavePDF(): Promise<void> {  
+  let content=this.content.nativeElement;    
+  const doc = new jsPDF();  
+  let _elementHandlers =  
+  {  
+    '#editor':function(element: any,renderer: any){  
+      return true;  
+    }  
+  };  
+  // doc.fromHTML(content.innerHTML,15,15,{  
 
- 
+  //   'width':190,  
+  //   'elementHandlers':_elementHandlers  
+  // });  
+  await doc.html(content.innerHTML)
+  doc.save('test.pdf');  
+}  
+downloadCSV() {
+  this.csvData = [
+    [
+      'S.No',
+      'Date',
+      'SendedAmount',
+      'RecievedAmount',
+      'Reason',
+    ],
+  ];
+
+  this.userList.forEach((userList: any, index: number) => {
+    const csvRow = [
+      index + 1,
+      userList.date,
+      userList.SendedAmount,
+      userList.RecievedAmount,
+      userList.Reason
+    ]
+    this.csvData.push(csvRow);
+  })
+
+  let csvFile =
+    'data:text/csv;charset=utf-8,' +
+    this.csvData.map((e: any) => e.join(',')).join('\n');
+
+  var encodedUri = encodeURI(csvFile);
+  var link = document.createElement('a');
+  link.setAttribute('href', encodedUri);
+  var timeF = new Date().toLocaleString();
+  const fileName = `Export_${timeF}.csv`;
+  link.setAttribute(
+    'download',
+    fileName.replace(',', '').replace(' ', '_')
+  );
+  document.body.appendChild(link);
+
+  link.click();
+  if (this.plt.is('cordova')) {
+    this.file.writeFile(this.file.dataDirectory, 'data.csv', this.csvData, {replace: true}).then( (res: { nativeURL: any; }) => {
+      this.socialSharing.share(null, null, res.nativeURL, null).then((e: any) =>{
+        // Success
+      }).catch((e: any) =>{
+        console.log('Share failed:', e)
+      });
+    }, (err: any) => {
+      console.log('Error: ', err);
+    });
+
+  } else {
+    // Dummy implementation for Desktop download purpose
+    var blob  = new Blob([this.csvData]);
+    var a = window.document.createElement('a');
+    a.href = window.URL.createObjectURL(blob);
+    a.download = 'newdata.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
+}
+
+trackByFn(index: any, item: any) {
+  return index;
+}
+
 }
 
   

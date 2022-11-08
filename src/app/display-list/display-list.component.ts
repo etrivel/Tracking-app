@@ -39,6 +39,7 @@ grand:any=0;
     
   
    }
+   sendAmount1 = 0;
   ngOnInit(): void {
 
    //  this.list = this.storage.getItem("token");
@@ -68,6 +69,7 @@ grand:any=0;
      this.totalAmt=+(total as number) + +(item.SendedAmount as number) - +(item.RecievedAmount as number);
      this.sendAmount=+(this.sendAmount as number) + +(item.SendedAmount as number);
      this.RecieveAmount=+(this.sendAmount as number)-+( this.totalAmt);
+     this.sendAmount1 = this.sendAmount;
      return this.totalAmt;
  },0);
  this.i=this.userSum-this.totalAmt;
@@ -76,13 +78,16 @@ grand:any=0;
 
     
   }
+  k=0;
   applyFilter(filterValue: any ) {
     if(filterValue.value == ''){
       this.userList = this.user1List;
+    
     }
     else{
       if(filterValue != '' && (isNaN(filterValue.value)) ){
         this.userList =  this.user1List.filter(i => i.ReasonToSend?.toLowerCase().includes(filterValue?.value.toLowerCase()));
+       
       }
     
     else{
@@ -120,6 +125,7 @@ grand:any=0;
         this.totalAmt= +(total as number) + +(item.SendedAmount as number) - +(item.RecievedAmount as Number);
         this.sendAmount=0;
         this.sendAmount=+(this.grand as number) - +(item.RecievedAmount as number);
+        this.sendAmount1 = this.sendAmount;
         this.RecieveAmount=0;
         this.RecieveAmount=+(this.grand as number) - +( this.sendAmount as number);
         return this.totalAmt;

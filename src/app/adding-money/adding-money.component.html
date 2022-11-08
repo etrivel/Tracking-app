@@ -79,13 +79,14 @@ element.style {
         </div>
     <div class="col-md-8 c0l-sm-8 mt-4 mb-4 ">
      
-      <button  class="button"  (click)="exportexcel()">Export <img src="../assets/images/images1.png" 
+      <!-- (click)="exportexcel()" -->
+      <button  class="button"   (click) = " downloadCSV()">Export <img src="../assets/images/images1.png" 
         alt="100" width="20" height="20"> </button>
       
       <br>
-      <div  class="table-responsive" style="height: 300px;overflow: scroll;">
+      <div  class="table-responsive" id="content"  #content  style="height: 300px;overflow: scroll;">
                
-        <table  border="1" id="excel-table" style="width: 100%;" class="table table-bordered table-striped">
+        <table  border="1" style="width: 100%;" class="table table-bordered table-striped">
           <thead class="text-light bg-dark" style="position: sticky; top: 0;background-color:blueviolet;">
             <tr>
               <th  class="col-sm-1">S.No</th>

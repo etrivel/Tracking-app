@@ -38,9 +38,9 @@ this.date1 = this.currentDate.toLocaleDateString('en-GB', { timeZone: 'UTC' })
 this.userList1 = [];
 this.list=[];
    this.anotherObj =new anotherObj();
-   this.anotherObj.RecievedAmount = 0;
-   this.anotherObj.SendedAmount  =0 ;
-   this.anotherObj.date = this.date1;
+   this.anotherObj.RecievedAmount1 = 0;
+   this.anotherObj.SendedAmount1  =0 ;
+   this.anotherObj.date1 = this.date1;
     this.userForm=this.fb.group({
       SendedAmount:[0,Validators.required],
       RecievedAmount:["0",Validators.required],
@@ -60,42 +60,29 @@ this.list=[];
   ngOnInit(): void {
     this.getAddingMoneyValue()
   console.log("this.date1  : ",this.date1)
-  //  this.list = this.storage.getItem("token");
-  //  this.list.getItem("token");
-   // this.list.push("token");
    const records1 =localStorage.getItem('userList1');
    if(records1!==null){
      this.userList1 = JSON.parse(records1);
      this.user1List1 = JSON.parse(records1);
      this.userList1 = this.user1List1.reverse();
      }
-  //  let total =0;
-  //   this.userList1.forEach((item =>{
-  //      total = total + item.SendedAmount?;
-  //   });
-  //   console.log(total);
-  this.userSum=localStorage.getItem("Kotak");
+  this.userSum=localStorage.getItem("kotak");
    this.totalAmt = this.userList1.reduce((total,item)=>{
-    this.grand=  +(this.grand as number) + +(item.SendedAmount as number) + +(item.RecievedAmount as number);
-     this.totalAmt=+(total as number) + +(item.SendedAmount as number) - +(item.RecievedAmount as number);
-     this.sendAmount=+(this.sendAmount as number) + +(item.SendedAmount as number);
+    this.grand=  +(this.grand as number) + +(item.SendedAmount1 as number) + +(item.RecievedAmount1 as number);
+     this.totalAmt=+(total as number) + +(item.SendedAmount1 as number) - +(item.RecievedAmount1 as number);
+     this.sendAmount=+(this.sendAmount as number) + +(item.SendedAmount1 as number);
      this.RecieveAmount=+(this.sendAmount as number)-+( this.totalAmt);
      return this.totalAmt;
  },0);
  this.i=this.userSum-this.totalAmt;
  console.log(this.totalAmt);
  console.log("i value"+this.i);
+console.log(this.userList1,"this.userList1")
 
-
-}
-public signup(){
-   localStorage.setItem('sigup',JSON.stringify(this.userList1) )
 }
   public addItem(){
-    // this.storage.setItem("token",this.userForm.value);
-    // this.list.push("token");
     const latestId=this.getNewId();
-    this.anotherObj.userId= latestId;
+    this.anotherObj.userId1= latestId;
     const oldrecords1 = localStorage.getItem('userList1');
     if(oldrecords1 !== null){
       const userList1 = JSON.parse(oldrecords1);
@@ -104,9 +91,9 @@ public signup(){
       userList1.push(this.anotherObj);
       localStorage.setItem('userList1',JSON.stringify(userList1) ); 
       const totalAmt = this.userList1.reduce((total,item)=>{
-        this.grand= +(this.grand  as number)  + +(item.SendedAmount as number) + +(item.RecievedAmount as number);
-        this.totalAmt=+(total as number) + +(item.SendedAmount as number) - +(item.RecievedAmount as number);
-        this.sendAmount=+(this.sendAmount as number) + +(item.SendedAmount as number);
+        this.grand= +(this.grand  as number)  + +(item.SendedAmount1 as number) + +(item.RecievedAmount1 as number);
+        this.totalAmt=+(total as number) + +(item.SendedAmount1 as number) - +(item.RecievedAmount1 as number);
+        this.sendAmount=+(this.sendAmount as number) + +(item.SendedAmount1 as number);
         this.RecieveAmount=+(this.sendAmount as number)-+( this.totalAmt);
         return this.totalAmt;
 
@@ -134,7 +121,7 @@ public signup(){
   }
   sum(){
     const totalAmt = this.userList1.reduce((total,item)=>{
-      return +(total as number) + +(item.SendedAmount as number);
+      return +(total as number) + +(item.SendedAmount1 as number);
    },0);
    console.log(totalAmt);
   }
@@ -148,12 +135,12 @@ reset(){
     }
     else{
       if(filterValue != '' && (isNaN(filterValue.value)) ){
-        this.userList1 =  this.user1List1.filter( i=> i.ReasonToSend?.toLowerCase().includes(filterValue?.value.toLowerCase()));
+        this.userList1 =  this.user1List1.filter( i=> i.ReasonToSend1?.toLowerCase().includes(filterValue?.value.toLowerCase()));
       }
     
     else{
       console.log("else : ",(isNaN(filterValue.value)))
-      this.userList1 =  this.user1List1.filter(i => i.date?.toString().includes(filterValue.value));
+      this.userList1 =  this.user1List1.filter(i => i.date1?.toString().includes(filterValue.value));
     }
     }
     
@@ -163,26 +150,17 @@ remove(id: any){
   if (oldrecords1 !== null){
   const userList1=JSON.parse(oldrecords1);
   userList1.splice(userList1.findIndex((a:any)=>a.userId == id),1);
-// userList1.push(this.anotherObj);
   localStorage.setItem('userList1',JSON.stringify(userList1));
 }
-  // this.list.forEach((value: any,index: any)=>{
-  //   if(value == element)
-  //   this.list.splice(index,1);
-  
-  //});
-
-
-     
-  const records1 =localStorage.getItem('userList1');
+ const records1 =localStorage.getItem('userList1');
   if(records1!==null){
     this.userList1 = JSON.parse(records1);
      this.totalAmt = this.userList1.reduce((total,item)=>{
        this.grand=0;
-      this.grand= +(total  as number)  + +(item.SendedAmount as number) + +(item.RecievedAmount as Number);
-      this.totalAmt= +(total as number) + +(item.SendedAmount as number) - +(item.RecievedAmount as Number);
+      this.grand= +(total  as number)  + +(item.SendedAmount1 as number) + +(item.RecievedAmount1 as Number);
+      this.totalAmt= +(total as number) + +(item.SendedAmount1 as number) - +(item.RecievedAmount1 as Number);
       this.sendAmount=0;
-      this.sendAmount=+(this.grand as number) - +(item.RecievedAmount as number);
+      this.sendAmount=+(this.grand as number) - +(item.RecievedAmount1 as number);
       this.RecieveAmount=0;
       this.RecieveAmount=+(this.grand as number) - +( this.sendAmount as number);
       return this.totalAmt;
